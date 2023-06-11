@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const userRoutes = require('./routes/userRoutes');
 const db = require('./database');
+const cors = require('cors');
 
 // Kết nối cơ sở dữ liệu
 db.authenticate()
@@ -14,9 +15,11 @@ db.authenticate()
 
 // Middleware
 app.use(express.json());
+app.use(cors()); // Thêm middleware cors vào ứng dụng
+
 
 // Routes
-app.use('/users', userRoutes);
+app.use('/api', userRoutes);
 
 // Cổng lắng nghe
 const port = process.env.PORT || 3000;
